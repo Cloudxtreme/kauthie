@@ -8,3 +8,12 @@ for a core part of an app.
 
 This implementation is written on Go with the Gin framework and exposes a simple JSON API to allow other
 parts of the app to interact with account data. OAuth2 is also implemented.
+
+![Katie](https://raw.githubusercontent.com/kiasaki/kauthie/master/images/katie.png)
+[Drawing](http://yassui.deviantart.com/art/Katie-301245033) by **yassui** @ DeviantArt
+
+## Technology
+
+## What's implemented?
+
+## Contributing
