@@ -29,7 +29,7 @@ func init() {
 	rootCmd.PersistentFlags().String("mongodb_uri", "mongodb://localhost:27017/", "Uri to connect to mongoDB")
 	viper.BindPFlag("mongodb_uri", rootCmd.PersistentFlags().Lookup("mongodb_uri"))
 
-	serverCmd.Flags().Int("port", 1138, "Port to run Kauthie app server on")
+	serverCmd.Flags().Int("port", 1337, "Port to run Kauthie app server on")
 	viper.BindPFlag("port", serverCmd.Flags().Lookup("port"))
 }
 

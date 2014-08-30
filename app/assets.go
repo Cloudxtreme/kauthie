@@ -16,6 +16,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var styleFiles *sassy.FileSet = &sassy.FileSet{
+	IncludeDir:   []string{""},
+	Style:        sassy.CompressedStyle,
+	ShowComments: false,
+}
+
 func staticRoute(c *gin.Context) {
 	static, err := rice.FindBox("static")
 	if err != nil {
@@ -28,6 +34,16 @@ func staticRoute(c *gin.Context) {
 	c.Request.URL.Path = original
 }
 
+// Servers requested css file using the compiled scss
+func stylesRoute(c *gin.Context) {
+	styleFiles.ServeHTTP(c.Writer, c.Request)
+}
+
+// Takes a list of scss file and parses them for later use in the "stylesRoute"
+func loadStyles(list ...string) {
+
+}
+
 func loadTemplates(list ...string) *template.Template {
 	templateBox, err := rice.FindBox("templates")
 	if err != nil {
@@ -37,7 +53,7 @@ func loadTemplates(list ...string) *template.Template {
 	templates := template.New("")
 
 	for _, x := range list {
-		templateString, err := templateBox.String(x)
+		templateString, err := templateBox.String(x + ".html")
 		if err != nil {
 			log.Fatal(err)
 		}
