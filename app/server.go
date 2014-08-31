@@ -7,9 +7,9 @@ package app
 
 import (
 	"fmt"
-	"net/url"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gorilla/context"
 )
 
 func Server(port string) {
@@ -46,8 +46,14 @@ func Server(port string) {
 // Auth middleware to be used when setting up routes
 // Responds with json when the request content-type is json
 func auth(c *gin.Context) {
-	c.Request.Header.Get("Authorization")
-	c.Redirect(302, "/login?next="+url.QueryEscape(c.Request.URL.Path))
+	session, _ := sessionStore.Get(r, sessionName)
+
+	user, err := checkRequestForUser(c, session)
+	if err != nil {
+
+	}
+
+	context.Clear(r)
 
 }
 
