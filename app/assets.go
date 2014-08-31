@@ -6,7 +6,6 @@
 package app
 
 import (
-	"html"
 	"html/template"
 	"log"
 	"net/http"
@@ -15,12 +14,6 @@ import (
 	"github.com/GeertJohan/go.rice"
 	"github.com/gin-gonic/gin"
 )
-
-var styleFiles *sassy.FileSet = &sassy.FileSet{
-	IncludeDir:   []string{""},
-	Style:        sassy.CompressedStyle,
-	ShowComments: false,
-}
 
 func staticRoute(c *gin.Context) {
 	static, err := rice.FindBox("static")
@@ -32,16 +25,6 @@ func staticRoute(c *gin.Context) {
 	c.Request.URL.Path = c.Params.ByName("filepath")
 	http.FileServer(static.HTTPBox()).ServeHTTP(c.Writer, c.Request)
 	c.Request.URL.Path = original
-}
-
-// Servers requested css file using the compiled scss
-func stylesRoute(c *gin.Context) {
-	styleFiles.ServeHTTP(c.Writer, c.Request)
-}
-
-// Takes a list of scss file and parses them for later use in the "stylesRoute"
-func loadStyles(list ...string) {
-
 }
 
 func loadTemplates(list ...string) *template.Template {
@@ -66,18 +49,10 @@ func loadTemplates(list ...string) *template.Template {
 	}
 
 	funcMap := template.FuncMap{
-		"html":  ProperHtml,
 		"title": func(a string) string { return strings.Title(a) },
 	}
 
 	templates.Funcs(funcMap)
 
 	return templates
-}
-
-func ProperHtml(text string) template.HTML {
-	if strings.Contains(text, "content:encoded>") || strings.Contains(text, "content/:encoded>") {
-		text = html.UnescapeString(text)
-	}
-	return template.HTML(html.UnescapeString(template.HTMLEscapeString(text)))
 }

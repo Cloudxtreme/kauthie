@@ -7,6 +7,7 @@ package app
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,7 +20,7 @@ func Server(port string) {
 	r.SetHTMLTemplate(templates)
 
 	// Routes
-	r.GET("/", homeRoute)
+	r.GET("/", selectorRoute)
 
 	r.GET("/authorize", authorizeRoute)
 	r.GET("/token", tokenRoute)
@@ -36,23 +37,25 @@ func Server(port string) {
 	}
 
 	r.GET("/static/*filepath", staticRoute)
-	r.GET("/css/*filepath", stylesRoute)
 
 	// Run
-	fmt.Println("A ---> Running on port:", port)
+	fmt.Println("K ---> App running on port:", port)
 	r.Run(":" + port)
 }
 
 // Auth middleware to be used when setting up routes
 // Responds with json when the request content-type is json
 func auth(c *gin.Context) {
+	c.Request.Header.Get("Authorization")
+	c.Redirect(302, "/login?next="+url.QueryEscape(c.Request.URL.Path))
 
 }
 
 // Home page route: redirects to login if not logged in
 // Redirects to first account if user has one account
 // Renders account selection if more than one account is owned
-func homeRoute(c *gin.Context) {
+func selectorRoute(c *gin.Context) {
+	// If one account -> redirect to that one
 
 	c.HTML(200, "selector", gin.H{})
 }

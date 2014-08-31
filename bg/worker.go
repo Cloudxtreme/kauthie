@@ -10,7 +10,7 @@ import (
 )
 
 func Worker() {
-	fmt.Println("A ---> Worker started working...")
+	fmt.Println("K ---> Worker started working...")
 
 	// Delete old sessions
 	// Delete old records
