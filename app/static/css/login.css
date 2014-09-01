@@ -1,0 +1,136 @@
+* {
+  border: 0;
+  margin: 0;
+  line-height: 1;
+  box-sizing: border-box;
+  -ms-box-sizing:border-box;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 0; margin: 0;
+  background: #fff;
+  color: #222;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: #1fadc5;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  border: 1px solid #ccc;
+  padding: 0.6em;
+  border-radius: 3px;
+  font-size: 100%;
+}
+
+button {
+  padding: 0.3em 1.2em;
+  background-color: #008585;
+  color: #fff;
+  font-size: 100%;
+  cursor: pointer;
+  border-radius: 5em;
+  outline: 0;
+}
+button:hover {
+  background-color: #006c6c;
+}
+button:active {
+  background-color: #003939;
+}
+
+header#main-header {
+  margin: 100px 0;
+}
+header#main-header .logo {
+  margin: 0 auto;
+  width: 100px; height: 100px;
+  border-radius: 4px;
+  background: #333;
+  color: #eee;
+  text-align: center;
+  font-family: serif;
+  font-size: 4em;
+  line-height: 100px;
+}
+
+section#main-content {
+  padding: 2em;
+  width: 333px;
+  background-color: rgba(204, 204, 204, 0.5);/*#ccc*/
+  color: #222;
+  margin: 0 auto 50px;
+  border-radius: 4px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 1.2em;
+  font-weight: 300;
+  text-align: left;
+}
+
+form span {
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+form button {
+  width: 100%;
+  border-radius: 4px;
+  font-size: 110%;
+  padding: 0.6em 0;
+  margin-bottom: 1em;
+}
+
+form input {
+  width: 100%;
+  border: none;
+  background-color: #fff;
+}
+
+form input:focus {
+  background-color: #eee;
+}
+
+section#main-content h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  margin-bottom: 0.6em;
+}
+
+section#main-content .alert {
+  color: red;
+}
+
+footer {
+  border-top: 1px solid #ccc;
+  margin: 1em -2em -2em;
+  text-align: center;
+}
+
+footer a {
+  color: #006666;
+  line-height: 2.5;
+  display: block;
+  background: #eee;
+}
+footer a:hover {
+  background: none;
+  text-decoration: none;
+}
+footer a:last-child {
+  border-radius: 0 0 4px 4px;
+}

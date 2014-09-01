@@ -1,4 +1,10 @@
-.DS_Store
-Thumbs.db
-tmp
-ideas
+*
+!.heroku
+!Procfile
+!.gitignore
+!dot.env.exemple
+!*.go
+!*.html
+!*.css
+!*.js
+!*/

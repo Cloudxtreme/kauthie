@@ -11,6 +11,7 @@ import (
 	"os"
 	"os/signal"
 
+	"github.com/joho/godotenv"
 	"github.com/kiasaki/kauthie/admin"
 	"github.com/kiasaki/kauthie/app"
 	"github.com/kiasaki/kauthie/util"
@@ -19,7 +20,7 @@ import (
 )
 
 var (
-	DatabaseUrl = flag.String("database", util.Getenv("DATABASE_URL", "mongodb://localhost:10044/kauthie"), "Mongo database url")
+	DatabaseUrl = flag.String("database", util.Getenv("DATABASE_URL", "mongodb://localhost:27017/kauthie"), "Mongo database url")
 	Port        = flag.Int("port", 1337, "Port to start the app server on")
 	AdminPort   = flag.Int("admin_port", 1334, "Port to start the admin server on")
 
@@ -33,6 +34,7 @@ func init() {
 }
 
 func main() {
+	godotenv.Load()
 	flag.Parse()
 
 	if *StartApp {

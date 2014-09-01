@@ -1,0 +1,26 @@
+{{ define "title" }}Kauthie - Login{{ end }}
+
+{{ define "content" }}
+  <h1>Welcome back!</h1>
+
+  {{ range .c.Session.Flashes }}
+    <div class="alert">{{ . }}</div>
+  {{ end }}
+
+  <form action="{{ reverse "login" }}" method="POST">
+    <label>
+      <span>Username</span>
+      <input name="username" autofocus>
+    </label>
+    <label>
+      <span>Password</span>
+      <input name="password" type="password">
+    </label>
+    <p><button>Log in</button></p>
+
+    <footer>
+      <a href="/forgot">Forgot details?</a>
+      <a href="/signup">Create a new account!</a>
+    </footer>
+  </form>
+{{ end }}
