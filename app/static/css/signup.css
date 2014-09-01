@@ -51,6 +51,14 @@ body {
   clear:both;
 }
 
+.errors {
+  margin-top: 2em;
+  color: #be0000;
+}
+.errors p {
+  line-height: 1.6;
+}
+
 img {
   max-width: 100%;
 }
@@ -89,6 +97,9 @@ button:hover {
   background-color: #006c6c;
 }
 button:active {
+  background-color: #003939;
+}
+button:disabled {
   background-color: #003939;
 }
 
