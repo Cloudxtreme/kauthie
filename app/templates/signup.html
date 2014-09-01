@@ -57,9 +57,15 @@
         <label>
           <span>Plan</span>
           <select name="plan">
-            <option value="plan5">Lone ranger ($5 / month)</option>
-            <option value="plan25">Teaming up ($25 / month)</option>
-            <option value="plan125">Incorporated ($125 / month)</option>
+            <option value="plan5" {{if eq .selectedPlan "plan5"}}selected="selected"{{end}}>
+              Lone ranger ($5 / month)
+            </option>
+            <option value="plan25" {{if eq .selectedPlan "plan25"}}selected="selected"{{end}}>
+              Teaming up ($25 / month)
+            </option>
+            <option value="plan125" {{if eq .selectedPlan "plan125"}}selected="selected"{{end}}>
+              Incorporated ($125 / month)
+            </option>
           </select>
         </label>
 

@@ -19,10 +19,12 @@ func registerAuthHandlers(r *mux.Router, s *util.Server) {
 }
 
 func signupHandler(c *util.Context) error {
-	return c.T("s", "signup").Execute(c.Writer, map[string]interface{}{
-		"pricingUrl": webUrl + "pricing",
-		"docsUrl":    webUrl + "docs",
-		"blogUrl":    blogUrl,
+	selectedPlan := c.Request.FormValue("plan")
+	return c.T("s", "signup").Execute(c.Writer, map[string]string{
+		"pricingUrl":   webUrl + "pricing",
+		"docsUrl":      webUrl + "docs",
+		"blogUrl":      blogUrl,
+		"selectedPlan": selectedPlan,
 	})
 }
 

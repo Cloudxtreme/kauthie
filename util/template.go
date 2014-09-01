@@ -31,8 +31,8 @@ func (cl *CachedLayout) GetTemplate(name string) *template.Template {
 
 	t := template.New(name).Funcs(cl.Functions)
 
-	t.Parse(cl.Box.MustString(name + ".html"))
 	t.Parse(cl.Box.MustString(cl.Layout + ".html"))
+	t.Parse(cl.Box.MustString(name + ".html"))
 	cachedTemplates[name] = t
 
 	return t
