@@ -1,0 +1,94 @@
+{{ define "title" }}Kauthie - Signup{{ end }}
+
+{{ define "content" }}
+  <section class="form">
+    <p class="right-helper">Already have an account? <a href="/login">Login</a></p>
+
+    <h1>Sign up</h1>
+
+    {{ range .c.Session.Flashes }}
+      <div class="alert">{{ . }}</div>
+    {{ end }}
+
+    <form action="{{ routeurl "signup" }}" method="POST">
+      <fieldset>
+        <h2>Account information</h2>
+
+        <label>
+          <span>Name</span>
+          <input name="fullname" placeholder="Your Real Name" autofocus>
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" placeholder="you@awesome-domain.com">
+        </label>
+        <label>
+          <span>Password</span>
+          <input name="password" type="password" placeholder="very secret passcode">
+        </label>
+
+      </fieldset>
+      <fieldset>
+        <h2>Billing information</h2>
+
+        <label>
+          <span>Name on card</span>
+          <input name="cardname">
+        </label>
+        <label>
+          <span>Card number</span>
+          <input name="cardnumber" autocomplete="off">
+        </label>
+
+        <div class="card-exp-and-cvc clearfix">
+          <label>
+            <span>Expiration</span>
+            <div class="controls">
+              <input name="card-exp-month" placeholder="MM" maxlength="2">
+              <input name="card-exp-year" placeholder="YYYY" maxlength="4">
+            </div>
+          </label>
+          <label>
+            <span>CVC</span>
+            <input name="card-cvc">
+          </label>
+        </div>
+
+        <label>
+          <span>Plan</span>
+          <select name="plan">
+            <option value="plan5">Lone ranger ($5 / month)</option>
+            <option value="plan25">Teaming up ($25 / month)</option>
+            <option value="plan125">Incorporated ($125 / month)</option>
+          </select>
+        </label>
+
+      </fieldset>
+
+      <hr>
+
+      <button>Create account</button>
+
+      <footer>
+        Payments are processed securely through <a href="https://stripe.com/" target="_blank">Stripe</a>.
+      </footer>
+    </form>
+  </section>
+
+  <aside class="sidebar">
+    <h2>Up and running in 3, 2, 1...</h2>
+    <p>
+      Beef porchetta fatback spare ribs doner. Fatback bresaola ham kevin. Rump frankfurter pork tongue kielbasa, kevin sirloin shoulder beef ribs venison meatloaf drumstick pork belly pork chop landjaeger.
+    </p>
+
+    <h2>Flexible billing</h2>
+    <p>
+      Filet mignon hamburger landjaeger ribeye fatback. Drumstick tenderloin sirloin andouille sausage kevin, venison salami meatloaf tongue t-bone prosciutto capicola jowl short ribs.
+    </p>
+
+    <h2>Questions? Comments?</h2>
+    <p>
+    Pork belly salami porchetta jowl shank kevin t-bone rump corned beef pork ball tip <a href="mailto:dude@theinternet.com">turkey sirloin</a> ham hock. Shank doner sirloin beef ribs ball tip beef leberkas fatback strip steak drumstick tail.
+    </p>
+  </aside>
+{{ end }}

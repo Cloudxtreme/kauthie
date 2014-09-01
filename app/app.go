@@ -23,12 +23,14 @@ var (
 	apiUrl    string
 	appUrl    string
 	webUrl    string
+	blogUrl   string
 )
 
 func Serve(port int, dbUrl string) {
 	apiUrl = util.Getenv("API_URL")
 	appUrl = util.Getenv("APP_URL")
 	webUrl = util.Getenv("WEB_URL")
+	webUrl = util.Getenv("BLOG_URL")
 
 	appServer = util.NewServer()
 	// Set up templates

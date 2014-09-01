@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ template "title" . }}</title>
+
+    <link href="/static/css/signup.css" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet" type="text/css" async>
+  </head>
+  <body>
+    <header id="main-header">
+      <div class="container">
+        <div class="logo">K</div>
+        <nav>
+          <a href="{{ .pricingUrl }}">Pricing</a>
+          <a href="{{ .docsUrl }}">Documentation</a>
+          <a href="{{ .blogUrl }}">Blog</a>
+          <a href="/login">Sign in</a>
+          <a href="/signup" class="btn">Get Started</a>
+        </nav>
+      </div>
+    </header>
+    <section id="main-content" class="container">
+      {{ template "content" . }}
+    </section>
+  </body>
+</html>
