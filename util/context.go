@@ -6,6 +6,7 @@
 package util
 
 import (
+	"html/template"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -20,24 +21,39 @@ type Context struct {
 	User     *data.User
 	Request  *http.Request
 	Writer   http.ResponseWriter
+	Server   *Server
 }
 
 func (c *Context) Close() {
 	c.Database.Session.Close()
 }
 
-//C is a convenience function to return a collection from the context database.
+// C is a convenience function to return a collection from the context database.
 func (c *Context) C(name string) *mgo.Collection {
 	return c.Database.C(name)
 }
 
-func (s Server) NewContext(w http.ResponseWriter, req *http.Request) (*Context, error) {
+// T is a convenience function to reder a template with a previously specified layout
+func (c *Context) T(layoutShorthand string, name string) *template.Template {
+	if cl, ok := c.Server.Layouts[layoutShorthand]; ok {
+		return cl.GetTemplate(name)
+	}
+	return nil
+}
+
+// Shortcut to server.RouteUrl(name string)
+func (c *Context) RouteUrl(name string) string {
+	return c.Server.RouteUrl(name)
+}
+
+func (s *Server) NewContext(w http.ResponseWriter, req *http.Request) (*Context, error) {
 	session, err := s.SessionStore.Get(req, s.SessionName)
 	ctx := &Context{
 		Database: s.Database.Clone().DB(s.DatabaseName),
 		Session:  session,
 		Request:  req,
 		Writer:   w,
+		Server:   s,
 	}
 	if err != nil {
 		// There was no session, do not bother fetching user

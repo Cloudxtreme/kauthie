@@ -15,22 +15,25 @@ import (
 var cachedTemplates = map[string]*template.Template{}
 var cachedMutex sync.Mutex
 
-func TemplateForLayout(box *rice.Box, layout string, funcs template.FuncMap) func(string) *template.Template {
+type CachedLayout struct {
+	Box       *rice.Box
+	Layout    string
+	Functions template.FuncMap
+}
 
-	return func(name string) *template.Template {
-		cachedMutex.Lock()
-		defer cachedMutex.Unlock()
+func (cl *CachedLayout) GetTemplate(name string) *template.Template {
+	cachedMutex.Lock()
+	defer cachedMutex.Unlock()
 
-		if t, ok := cachedTemplates[name]; ok {
-			return t
-		}
-
-		t := template.New(name).Funcs(funcs)
-
-		t.Parse(box.MustString(name + ".html"))
-		t.Parse(box.MustString(layout + ".html"))
-		cachedTemplates[name] = t
-
+	if t, ok := cachedTemplates[name]; ok {
 		return t
 	}
+
+	t := template.New(name).Funcs(cl.Functions)
+
+	t.Parse(cl.Box.MustString(name + ".html"))
+	t.Parse(cl.Box.MustString(cl.Layout + ".html"))
+	cachedTemplates[name] = t
+
+	return t
 }

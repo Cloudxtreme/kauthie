@@ -7,7 +7,7 @@
     <div class="alert">{{ . }}</div>
   {{ end }}
 
-  <form action="{{ reverse "login" }}" method="POST">
+  <form action="{{ routeurl "login" }}" method="POST">
     <label>
       <span>Username</span>
       <input name="username" autofocus>

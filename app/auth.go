@@ -18,13 +18,13 @@ func registerAuthHandlers(r *mux.Router, s *util.Server) {
 }
 
 func loginHandler(c *util.Context) error {
-	return LoginT("login").Execute(c.Writer, map[string]interface{}{
+	return c.T("l", "login").Execute(c.Writer, map[string]interface{}{
 		"context": c,
 	})
 }
 
 func logoutHandler(c *util.Context) error {
 	delete(c.Session.Values, "user")
-	http.Redirect(c.Writer, c.Request, reverse("login"), http.StatusSeeOther)
+	http.Redirect(c.Writer, c.Request, c.RouteUrl("login"), http.StatusSeeOther)
 	return nil
 }
