@@ -6,8 +6,13 @@
 package app
 
 import (
+	"log"
+	"time"
+
 	"github.com/gorilla/mux"
+	"github.com/kiasaki/kauthie/data"
 	"github.com/kiasaki/kauthie/util"
+	"github.com/stripe/stripe"
 )
 
 func registerSignupHandlers(r *mux.Router, s *util.Server) {
@@ -25,9 +30,9 @@ func signupHandler(c *util.Context) error {
 	})
 }
 
-func signupHandler(c *util.Context) error {
+func signupPostHandler(c *util.Context) error {
 	// Setup stripe client
-	stripeClient = stripe.Client{}
+	stripeClient := stripe.Client{}
 	stripeClient.Init(util.Getenv("STRIPE_PRIVATE_KEY"), nil, nil)
 
 	// Gater form values
@@ -37,8 +42,32 @@ func signupHandler(c *util.Context) error {
 	plan := c.Request.FormValue("plan")
 	token := c.Request.FormValue("stripeToken")
 
+	// Store new user in mongo
+	user := data.User{
+		Email:    email,
+		Fullname: fullname,
+		Created:  time.Now(),
+		Updated:  time.Now(),
+	}
+	user.SetPassword(password)
+	err := c.C("users").Insert(user)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Now create his account
+
 	// Create and Customer, subscribe him, start trial, associate card (1-step)
-	//stripeClient.Customers.Add()
+	customer := CustomerParams{
+		Meta: map[string]string{
+			"uid": string(1),
+		},
+		Token: token,
+		Desc:  fullname,
+		Email: email,
+		Plan:  plan,
+	}
+	stripeClient.Customers.Add(customer)
 
 	return nil
 }

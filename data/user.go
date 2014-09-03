@@ -6,6 +6,8 @@
 package data
 
 import (
+	"time"
+
 	"code.google.com/p/go.crypto/bcrypt"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -13,13 +15,15 @@ import (
 
 type User struct {
 	ID       bson.ObjectId `bson:"_id,omitempty"`
-	Username string
+	Email    string
+	Fullname string
 	Password []byte
-	Posts    int
+	Created  time.Time
+	Updated  time.Time
 }
 
-//SetPassword takes a plaintext password and hashes it with bcrypt and sets the
-//password field to the hash.
+// SetPassword takes a plaintext password and hashes it with bcrypt and sets the
+// password field to the hash.
 func (u *User) SetPassword(password string) {
 	hpass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
@@ -28,7 +32,7 @@ func (u *User) SetPassword(password string) {
 	u.Password = hpass
 }
 
-//Login validates and returns a user object if they exist in the database.
+// Login validates and returns a user object if they exist in the database.
 func Login(d *mgo.Database, username, password string) (u *User, err error) {
 	err = d.C("users").Find(bson.M{"username": username}).One(&u)
 	if err != nil {
