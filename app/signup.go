@@ -60,9 +60,9 @@ func signupPostHandler(c *util.Context) error {
 	account := data.Account{
 		Name: accountName,
 	}
-	cerr := account.Create(c.C("accounts"))
+	err = account.Create(c.C("accounts"))
 	if err != nil {
-		log.Fatal(cerr)
+		log.Fatal(err)
 	}
 
 	// Create and Customer, subscribe him, start trial, associate card (1-step)
