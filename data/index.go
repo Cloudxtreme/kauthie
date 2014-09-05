@@ -12,7 +12,14 @@ import (
 // Ensure database indexes are respected for given mongo database
 func Index(db *mgo.Database) {
 	if err := db.C("users").EnsureIndex(mgo.Index{
-		Key:    []string{"username"},
+		Key:    []string{"email"},
+		Unique: true,
+	}); err != nil {
+		panic(err)
+	}
+
+	if err := db.C("accounts").EnsureIndex(mgo.Index{
+		Key:    []string{"UID"},
 		Unique: true,
 	}); err != nil {
 		panic(err)

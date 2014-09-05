@@ -8,14 +8,39 @@ package data
 import (
 	"time"
 
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 type Account struct {
 	ID      bson.ObjectId `bson:"_id,omitempty"`
+	UID     string
 	Name    string
-	Slug    string
 	Plan    string
 	Created time.Time
 	Updated time.Time
+}
+
+func (a *Account) Create(c *mgo.Collection) error {
+	a.Created = time.Now()
+	a.Updated = time.Now()
+	a.UID = a.GenerateUID(c)
+
+	return c.Insert(a)
+}
+
+func (a *Account) GenerateUID(c *mgo.Collection) string {
+	candidate := RandomAlNum(8)
+
+	// Verify it's unique
+	n, err := c.Find(&Account{UID: candidate}).Count()
+	if err != nil {
+		panic(err)
+	}
+	// If we had a result -> try again
+	if n > 0 {
+		return a.GenerateUID(c)
+	}
+
+	return candidate
 }

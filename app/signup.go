@@ -32,11 +32,12 @@ func signupHandler(c *util.Context) error {
 
 func signupPostHandler(c *util.Context) error {
 	// Setup stripe client
-	stripeClient := stripe.Client{}
+	stripeClient := &stripe.Client{}
 	stripeClient.Init(util.Getenv("STRIPE_PRIVATE_KEY"), nil, nil)
 
 	// Gater form values
 	fullname := c.Request.FormValue("fullname")
+	accountName := c.Request.FormValue("account")
 	email := c.Request.FormValue("email")
 	password := c.Request.FormValue("password")
 	plan := c.Request.FormValue("plan")
@@ -56,18 +57,31 @@ func signupPostHandler(c *util.Context) error {
 	}
 
 	// Now create his account
+	account := data.Account{
+		Name: accountName,
+	}
+	cerr := account.Create(c.C("accounts"))
+	if err != nil {
+		log.Fatal(cerr)
+	}
 
 	// Create and Customer, subscribe him, start trial, associate card (1-step)
-	customer := CustomerParams{
-		Meta: map[string]string{
-			"uid": string(1),
-		},
+	customer := &stripe.CustomerParams{
 		Token: token,
 		Desc:  fullname,
 		Email: email,
 		Plan:  plan,
+		Params: stripe.Params{
+			Meta: map[string]string{
+				"uid": user.ID.String(),
+			},
+		},
 	}
-	stripeClient.Customers.Add(customer)
+	_, err = stripeClient.Customers.Create(customer)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return nil
 }
