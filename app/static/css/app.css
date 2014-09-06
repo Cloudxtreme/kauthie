@@ -35,6 +35,11 @@ body {
     max-width: 960px;
   }
 }
+@media (min-width: 1260px) {
+  .container {
+    max-width: 1200px;
+  }
+}
 .container:after {
   content: "\0020";
   display: block;
@@ -53,6 +58,7 @@ body {
 
 img {
   max-width: 100%;
+  vertical-align: middle;
 }
 
 a {
@@ -100,6 +106,86 @@ hr {
   margin: 1em 0;
 }
 
-#main-header {
+body, html {
+  background: #ccc;
+}
 
+header#main-header {
+  margin: 60px 0 0 0;
+}
+header#main-header .container {
+  border-radius: 4px 4px 0 0;
+  height: 60px;
+  background-color: #333;
+}
+header#main-header .logo {
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 4px;
+  display: block;
+  float: left;
+  background: #008585;
+  color: #fff;
+  text-align: center;
+  font-family: serif;
+  font-size: 24px;
+}
+header#main-header .user-badge {
+  float: right;
+  line-height: 60px;
+}
+header#main-header .user-badge img {
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+}
+header#main-header .user-badge a {
+  display: inline-block;
+  margin: 0 16px 0 12px;
+}
+header#main-header .user-badge nav {
+  display: none;
+}
+
+section#main-content {
+  margin-bottom: 60px;
+}
+section#main-content .container {
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+}
+
+section#main-content aside#main-sidebar {
+  float: left;
+  width: 25%;
+  padding-top: 16px;
+}
+section#main-content aside#main-sidebar hr {
+  border-color: #dfdfdf;
+  border-width: 2px;
+  margin: 16px 0;
+}
+section#main-content aside#main-sidebar a {
+  display: block;
+  line-height: 32px;
+  height: 32px;
+  font-size: 1em;
+  padding: 0 1em;
+  transition: all 0.3s;
+}
+section#main-content aside#main-sidebar a:hover {
+  text-decoration: none;
+  padding: 0 0.5em 0 1.5em;
+  background: #1fadc5;
+  color: #fff;
+}
+
+section#main-content section#page-content {
+  float: right;
+  width: 75%;
+  min-height: 300px;
+  border-left: 2px solid #dfdfdf;
+  padding: 16px;
 }
