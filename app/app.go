@@ -56,6 +56,7 @@ func Serve(port int, dbUrl string) {
 	// -----
 	// App Routes
 	// -----
+	registerAccountHandlers(appServer.Router, appServer)
 	registerSignupHandlers(appServer.Router, appServer)
 	registerAuthHandlers(appServer.Router, appServer)
 	registerHomeHandlers(appServer.Router, appServer)

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ template "title" . }}</title>
+
+    <link href="/static/css/app.css" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet" type="text/css" async>
+  </head>
+  <body>
+    <header id="main-header">
+      <div class="container">
+        <div class="logo">K</div>
+        <section class="user-badge">
+          <img src="https://avatars3.githubusercontent.com/u/1158933?v=2&s=460" />
+          <a href="javascript:void(0);">Frederic Gingras</a>
+          <nav>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+          </nav>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <aside id="main-sidebar">
+        <a href="/account/1">Settings</a>
+        <a href="/account/1/users">Users</a>
+        <a href="/account/1/billing">Billing</a>
+        <a href="/account/1/payments">Payment history</a>
+        <hr/>
+        <a href="/app">&larr; Back to app</a>
+      </aside>
+      <section id="main-content">
+        {{ template "content" . }}
+      </section>
+    </div>
+  </body>
+</html>

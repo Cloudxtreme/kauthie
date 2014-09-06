@@ -1,0 +1,105 @@
+* {
+  border: 0;
+  margin: 0;
+  line-height: 1;
+  box-sizing: border-box;
+  -ms-box-sizing:border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding: 0; margin: 0;
+  background: #fff;
+  color: #222;
+  font-size: 16px;
+}
+
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 750px;
+  }
+}
+@media (min-width: 1000px) {
+  .container {
+    max-width: 960px;
+  }
+}
+.container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix:before, .clearfix:after {
+  content:" ";
+  display:table;
+}
+.clearfix:after {
+  clear:both;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: #1fadc5;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+input, select {
+  border: 2px solid #ccc;
+  padding: 0.6em;
+  border-radius: 4px;
+  font-size: 100%;
+}
+
+select {
+  background: #efefef;
+}
+
+button {
+  padding: 0.3em 1.2em;
+  background-color: #008585;
+  color: #fff;
+  font-size: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: 0;
+  line-height: 2;
+}
+button:hover {
+  background-color: #006c6c;
+}
+button:active {
+  background-color: #003939;
+}
+button:disabled {
+  background-color: #003939;
+}
+
+hr {
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+}
+
+#main-header {
+
+}
