@@ -18,8 +18,19 @@ type User struct {
 	Email    string
 	Fullname string
 	Password []byte
+	StripeId string `omitempty`
+	Accounts []bson.ObjectId
 	Created  time.Time
 	Updated  time.Time
+}
+
+func (u *User) Create(c *mgo.Collection) error {
+	u.ID = bson.NewObjectId()
+	u.Accounts = []bson.ObjectId{}
+	u.Created = time.Now()
+	u.Updated = time.Now()
+
+	return c.Insert(u)
 }
 
 // SetPassword takes a plaintext password and hashes it with bcrypt and sets the

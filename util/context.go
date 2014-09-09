@@ -46,6 +46,11 @@ func (c *Context) RouteUrl(name string) string {
 	return c.Server.RouteUrl(name)
 }
 
+// Http redirect
+func (c *Context) Redirect(url string) {
+	http.Redirect(c.Writer, c.Request, url, http.StatusFound)
+}
+
 func (s *Server) NewContext(w http.ResponseWriter, req *http.Request) (*Context, error) {
 	session, err := s.SessionStore.Get(req, s.SessionName)
 	ctx := &Context{

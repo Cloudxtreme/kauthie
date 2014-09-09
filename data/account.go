@@ -17,13 +17,16 @@ type Account struct {
 	UID     string
 	Name    string
 	Plan    string
+	Users   []bson.ObjectId
 	Created time.Time
 	Updated time.Time
 }
 
 func (a *Account) Create(c *mgo.Collection) error {
+	a.ID = bson.NewObjectId()
 	a.Created = time.Now()
 	a.Updated = time.Now()
+	a.Users = []bson.ObjectId{}
 	a.UID = a.GenerateUID(c)
 
 	return c.Insert(a)

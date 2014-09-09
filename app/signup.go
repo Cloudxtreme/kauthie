@@ -7,7 +7,6 @@ package app
 
 import (
 	"log"
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/kiasaki/kauthie/data"
@@ -47,22 +46,24 @@ func signupPostHandler(c *util.Context) error {
 	user := data.User{
 		Email:    email,
 		Fullname: fullname,
-		Created:  time.Now(),
-		Updated:  time.Now(),
 	}
 	user.SetPassword(password)
-	err := c.C("users").Insert(user)
+	err := user.Create(c.C("users"))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return err
 	}
 
 	// Now create his account
 	account := data.Account{
 		Name: accountName,
+		Plan: plan,
 	}
+	account.Users = append(account.Users, user.ID)
 	err = account.Create(c.C("accounts"))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return err
 	}
 
 	// Create and Customer, subscribe him, start trial, associate card (1-step)
@@ -77,11 +78,18 @@ func signupPostHandler(c *util.Context) error {
 			},
 		},
 	}
-	_, err = stripeClient.Customers.Create(customer)
+	newCustomer, err := stripeClient.Customers.Create(customer)
+
+	// Save new imformation (stripe id) and add account id to user accounts
+	user.StripeId = newCustomer.Id
+	user.Accounts = append(user.Accounts, account.ID)
+	c.C("users").UpdateId(user.ID, user)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return err
 	}
 
+	c.Redirect(c.RouteUrl("login"))
 	return nil
 }

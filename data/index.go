@@ -19,7 +19,7 @@ func Index(db *mgo.Database) {
 	}
 
 	if err := db.C("accounts").EnsureIndex(mgo.Index{
-		Key:    []string{"UID"},
+		Key:    []string{"uid"},
 		Unique: true,
 	}); err != nil {
 		panic(err)
