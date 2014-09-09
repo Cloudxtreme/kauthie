@@ -26,7 +26,6 @@ type User struct {
 
 func (u *User) Create(c *mgo.Collection) error {
 	u.ID = bson.NewObjectId()
-	u.Accounts = []bson.ObjectId{}
 	u.Created = time.Now()
 	u.Updated = time.Now()
 

@@ -12,6 +12,7 @@ import (
 	"github.com/kiasaki/kauthie/data"
 	"github.com/kiasaki/kauthie/util"
 	"github.com/stripe/stripe"
+	"gopkg.in/mgo.v2/bson"
 )
 
 func registerSignupHandlers(r *mux.Router, s *util.Server) {
@@ -59,7 +60,7 @@ func signupPostHandler(c *util.Context) error {
 		Name: accountName,
 		Plan: plan,
 	}
-	account.Users = append(account.Users, user.ID)
+	account.Users = []bson.ObjectId{user.ID}
 	err = account.Create(c.C("accounts"))
 	if err != nil {
 		log.Print(err)
@@ -82,7 +83,7 @@ func signupPostHandler(c *util.Context) error {
 
 	// Save new imformation (stripe id) and add account id to user accounts
 	user.StripeId = newCustomer.Id
-	user.Accounts = append(user.Accounts, account.ID)
+	user.Accounts = []bson.ObjectId{account.ID}
 	c.C("users").UpdateId(user.ID, user)
 
 	if err != nil {
