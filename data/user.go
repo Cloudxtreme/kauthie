@@ -18,7 +18,7 @@ type User struct {
 	Email    string
 	Fullname string
 	Password []byte
-	StripeId string `omitempty`
+	StripeId string `bson:"stripe_id,omitempty"`
 	Accounts []bson.ObjectId
 	Created  time.Time
 	Updated  time.Time

@@ -1,0 +1,70 @@
+{
+	"ImportPath": "github.com/kiasaki/kauthie",
+	"GoVersion": "go1.3.1",
+	"Deps": [
+		{
+			"ImportPath": "bitbucket.org/kardianos/osext",
+			"Comment": "null-13",
+			"Rev": "5d3ddcf53a508cc2f7404eaebf546ef2cb5cdb6e"
+		},
+		{
+			"ImportPath": "code.google.com/p/go.crypto/bcrypt",
+			"Comment": "null-221",
+			"Rev": "6e881b5273dfffbadb6a76a61d3c39a71e3588d1"
+		},
+		{
+			"ImportPath": "code.google.com/p/go.crypto/blowfish",
+			"Comment": "null-221",
+			"Rev": "6e881b5273dfffbadb6a76a61d3c39a71e3588d1"
+		},
+		{
+			"ImportPath": "github.com/GeertJohan/go.rice",
+			"Rev": "a0d4a02d74cb33533c3a82c4652526536ee53ed8"
+		},
+		{
+			"ImportPath": "github.com/bluele/gforms",
+			"Rev": "3d289fde543e0ac5808fa5ec21397b1631e79b7a"
+		},
+		{
+			"ImportPath": "github.com/daaku/go.zipexe",
+			"Rev": "44882fc939f4c58d87a60de34796c6cfb9623269"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "4b8fbc56f3b2400a7c7ea3dba9b3539787c486b6"
+		},
+		{
+			"ImportPath": "github.com/gorilla/pat",
+			"Rev": "ae2e162c4b2ae96aa66b596b2c18f17834299ed0"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Rev": "1b0c7f6e9ab3d7f500fd7d50c7ad835ff428139b"
+		},
+		{
+			"ImportPath": "github.com/gorilla/sessions",
+			"Rev": "aa5e036e6c44aec69a32eb41097001978b29ad31"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Rev": "aab3ea4ba68f8fe7492604240b01190d9efc4db4"
+		},
+		{
+			"ImportPath": "github.com/stripe/stripe",
+			"Comment": "2014-08-04-42-gda8bf10",
+			"Rev": "da8bf1080fd3b4886c2f7a02134b2e65136c9ab4"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Rev": "c9fd3712fbf3e92924c974dce16da2d322508fe2"
+		},
+		{
+			"ImportPath": "thegoods.biz/httpbuf",
+			"Rev": "5709e9bb814c932e48b6737e1cf214a6522453a2"
+		}
+	]
+}

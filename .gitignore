@@ -7,4 +7,6 @@
 !*.html
 !*.css
 !*.js
+!*.json
 !*/
+Godeps/
