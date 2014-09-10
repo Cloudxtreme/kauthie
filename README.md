@@ -18,7 +18,10 @@ Setting up **Kauthie** on [Heroku](https://heroku.com/) is pretty straight fowar
 
 ```
 git clone git@github.com:kiasaki/kauthie.git
-heroku create -b https://github.com/kr/heroku-buildpack-go.git
+hk create
+hk addon-add mongohq
+hk addon-add mandrill
+hk set BUILDPACK_URL=https://github.com/kr/heroku-buildpack-go.git
 git push heroku master
 ```
 
