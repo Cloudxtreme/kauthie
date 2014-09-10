@@ -7,6 +7,7 @@ package app
 
 import (
 	"log"
+	"net/url"
 
 	"github.com/gorilla/mux"
 	"github.com/kiasaki/kauthie/data"
@@ -91,6 +92,6 @@ func signupPostHandler(c *util.Context) error {
 		return err
 	}
 
-	c.Redirect(c.RouteUrl("login"))
+	c.Redirect(c.RouteUrl("login") + "?next=" + url.QueryEscape(appUrl))
 	return nil
 }

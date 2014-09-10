@@ -6,11 +6,16 @@
   {{ range .c.Session.Flashes }}
     <div class="alert">{{ . }}</div>
   {{ end }}
+  {{ if .invalid }}
+    <div class="alert">Your credentials don't match!</div>
+  {{ end }}
 
   <form action="{{ routeurl "login" }}" method="POST">
+    <input type="hidden" name="next" value="{{ .next }}" />
+
     <label>
       <span>Username</span>
-      <input name="username" autofocus>
+      <input name="username" value="{{ .username }}">
     </label>
     <label>
       <span>Password</span>
@@ -23,4 +28,14 @@
       <a href="/signup">Create a new account!</a>
     </footer>
   </form>
+  <script src="/static/js/lib/jquery.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      if ($('input[name=username]').val() != "") {
+        $('input[name=password]').focus();
+      } else {
+        $('input[name=username]').focus();
+      }
+    });
+  </script>
 {{ end }}

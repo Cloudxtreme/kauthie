@@ -44,7 +44,7 @@ func (u *User) SetPassword(password string) {
 
 // Login validates and returns a user object if they exist in the database.
 func Login(d *mgo.Database, username, password string) (u *User, err error) {
-	err = d.C("users").Find(bson.M{"username": username}).One(&u)
+	err = d.C("users").Find(bson.M{"email": username}).One(&u)
 	if err != nil {
 		return
 	}

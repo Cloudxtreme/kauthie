@@ -16,6 +16,8 @@ type RouteHandler struct {
 	Handler func(*Context) error
 }
 
+type HandlerFunc func(*Context) error
+
 func (h *RouteHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	// Create the context
 	ctx, err := h.Server.NewContext(w, req)

@@ -11,7 +11,7 @@ import (
 )
 
 func registerAccountHandlers(r *mux.Router, s *util.Server) {
-	r.Handle("/dashboard", s.Handle(dashboardHandler)).Methods("GET").Name("dashboard")
+	r.Handle("/dashboard", s.Handle(Protect(dashboardHandler))).Methods("GET").Name("dashboard")
 }
 
 func dashboardHandler(c *util.Context) error {

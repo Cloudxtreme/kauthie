@@ -8,6 +8,7 @@ package app
 import (
 	"fmt"
 	"log"
+	"net/url"
 
 	"github.com/GeertJohan/go.rice"
 	"github.com/gorilla/mux"
@@ -64,4 +65,16 @@ func Serve(port int, dbUrl string) {
 	// Start the engines!
 	fmt.Println("K ---> App running on port:", port)
 	log.Fatal(appServer.Serve(port))
+}
+
+func Protect(handler util.HandlerFunc) util.HandlerFunc {
+	return func(c *util.Context) error {
+		if c.User != nil {
+			return handler(c)
+		} else {
+			c.Redirect(c.RouteUrl("login") + "?next=" +
+				url.QueryEscape(c.Request.URL.String()))
+			return nil
+		}
+	}
 }
