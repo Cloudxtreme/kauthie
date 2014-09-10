@@ -20,7 +20,7 @@ import (
 )
 
 var (
-	DatabaseUrl = flag.String("database", util.Getenv("DATABASE_URL", "mongodb://localhost:27017/kauthie"), "Mongo database url")
+	DatabaseUrl = flag.String("database", util.Getenv("MONGOHQ_URL", util.Getenv("DATABASE_URL", "mongodb://localhost:27017/kauthie")), "Mongo database url")
 	Port        = flag.Int("port", 1337, "Port to start the app server on")
 	AdminPort   = flag.Int("admin_port", 1334, "Port to start the admin server on")
 

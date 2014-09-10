@@ -2,7 +2,7 @@
 !.heroku
 !Procfile
 !.gitignore
-!dot.env.exemple
+!.env.exemple
 !*.go
 !*.html
 !*.css
